@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "app": {
+    "latestVersion": "0.9.0",
+    "minSupportedVersion": "0.0.0",
+    "downloadUrl": "https://editor.qnova.co.kr/download",
+    "releaseNotes": "첫 공개 버전입니다.",
+    "mandatory": false
+  },
+  "notice": {
+    "id": "qnova-2026-08",
+    "show": false,
+    "kind": "promo",
+    "placement": "card",
+    "title": "선생님을 위한 교재 제작, QNOVA",
+    "body": "교재 커버부터 내신 기출 분석까지 한 번에.",
+    "ctaText": "둘러보기",
+    "linkUrl": "https://qnova.co.kr?utm_source=qnova_editor&utm_medium=notice_card&utm_campaign=2026-08",
+    "startAt": "2026-08-18",
+    "endAt": "2026-12-31",
+    "frequency": "daily"
+  },
+  "nextConfigUrl": null
+}
