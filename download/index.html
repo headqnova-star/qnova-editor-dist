@@ -13,6 +13,8 @@
   .sub{color:#8A9099;margin:0 0 32px;font-size:15px}
   .btn{display:inline-block;background:#004ad6;color:#fff;text-decoration:none;
        padding:16px 32px;border-radius:10px;font-weight:700;font-size:17px}
+  .meta{margin-top:12px;font-size:13px;color:#8A9099}
+  .meta a{color:#8A9099}
   .box{background:#F0F1F3;border-radius:10px;padding:20px;margin-top:32px;font-size:14px}
   .box b{display:block;margin-bottom:6px}
   .box + .box{margin-top:12px}
@@ -24,9 +26,15 @@
   <h1>QNOVA 교재 편집기</h1>
   <p class="sub">HWP · DOCX · PDF에서 필요한 페이지만 골라 하나의 교재 PDF로 만듭니다. 무료입니다.</p>
 
-  <a class="btn" href="https://github.com/headqnova-star/qnova-editor-dist/releases/latest">
+  <!-- 기본 주소는 릴리스 목록. 자바스크립트가 막혀 있어도 받을 수 있는 길을 남겨 둔다.
+       아래 스크립트가 app-config.json 을 읽어 설치 파일을 바로 받는 주소로 바꿔 준다. -->
+  <a class="btn" id="dl" href="https://github.com/headqnova-star/qnova-editor-dist/releases/latest">
     최신 버전 다운로드 →
   </a>
+
+  <p class="meta" id="meta">
+    Windows 10 · 11 · 약 102MB
+  </p>
 
   <div class="box">
     <b>설치 중 파란 경고창이 뜨면</b>
@@ -40,7 +48,44 @@
     PDF만 쓰신다면 아무것도 필요 없습니다.
   </div>
 
+  <div class="box">
+    <b>이미 쓰고 계신 분은</b>
+    받은 설치 파일을 그대로 실행하면 덮어쓰기로 업데이트됩니다.
+    학원 설정과 로고는 그대로 남습니다. 지우고 다시 깔 필요가 없습니다.
+  </div>
+
   <footer>© 2026 ACADEMIC SOLUTIONS &nbsp;|&nbsp; qnova.co.kr</footer>
 </div>
+
+<script>
+/* 새 버전을 낼 때마다 이 페이지를 고치지 않기 위해, 앱이 보는 것과 같은 app-config.json 을
+   여기서도 읽는다. 그 파일 하나만 고치면 앱의 업데이트 띠와 이 페이지가 함께 움직인다.
+
+   설치 파일을 바로 받는 주소로 바꾸는 이유: 릴리스 목록으로 보내면 소스 코드 zip 이 함께
+   보이는 깃허브 화면을 거쳐야 해서, 어느 것을 눌러야 하는지 되묻는 일이 생긴다.
+
+   실패하면 아무것도 하지 않는다. 그러면 HTML 에 적힌 릴리스 목록 주소가 그대로 살아 있다. */
+(function () {
+  var REPO = 'https://github.com/headqnova-star/qnova-editor-dist'
+
+  fetch('/app-config.json', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : null })
+    .then(function (c) {
+      var v = c && c.app && c.app.latestVersion
+      // 형식이 어긋나면 손대지 않는다. 없는 주소로 보내는 것이 목록으로 보내는 것보다 나쁘다
+      if (!v || !/^\d+\.\d+\.\d+$/.test(v)) return
+
+      var url = REPO + '/releases/download/v' + v + '/QnovaEditor_Setup_' + v + '.exe'
+      var btn = document.getElementById('dl')
+      btn.href = url
+      btn.textContent = '최신 버전 ' + v + ' 다운로드 →'
+
+      document.getElementById('meta').innerHTML =
+        'Windows 10 · 11 · 약 102MB &nbsp;|&nbsp; ' +
+        '<a href="' + REPO + '/releases">받아지지 않으면 이곳에서</a>'
+    })
+    .catch(function () { /* 목록 주소로 둔다 */ })
+})()
+</script>
 </body>
 </html>
