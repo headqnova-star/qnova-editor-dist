@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "app": {
-    "latestVersion": "0.9.3",
+    "latestVersion": "0.9.4",
     "minSupportedVersion": "0.0.0",
     "downloadUrl": "https://editor.qnova.co.kr/download",
-    "releaseNotes": "교재 파일마다 우측(홀수) 쪽에서 시작하도록 제본 규칙을 개선하고, 커버 정보 칸 글자 크기를 키웠습니다.",
+    "releaseNotes": "끝 커버 로고를 QNOVA CI로 바꾸고 커버 디자인을 다듬었습니다.",
     "mandatory": false
   },
   "notice": {
